@@ -11,4 +11,3 @@ for( var i=0; i< buttons.length; i++ )
 }
 
 console.log("Loaded LXPlus JS");
-alert("HI KRIS!");
