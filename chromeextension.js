@@ -9,3 +9,5 @@ for( var i=0; i< buttons.length; i++ )
 	}
 	var childDiv = buttons[i];
 }
+
+console.log("Loaded LXPlus JS");
