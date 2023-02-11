@@ -3,9 +3,9 @@ var buttons = document.getElementsByClassName('button-bar')[0].getElementsByTagN
 for( var i=0; i< buttons.length; i++ )
 {
 	if(buttons[i].innerText=="Edit Order"){
-		buttons[i].href = window.location.href+"/edit";
+		buttons[i].href = '//' + location.host + location.pathname+"/edit";
 	}else if(buttons[i].innerText=="Export CSV"){
-		buttons[i].href = window.location.href+"/export";
+		buttons[i].href = '//' + location.host + location.pathname+"/export";
 	}
 	var childDiv = buttons[i];
 }
