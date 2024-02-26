@@ -40,6 +40,19 @@ function pi_login(){
   });
 }
 
+window.addEventListener("message", (event) => {
+  if (event.origin === "*") {
+    const message = JSON.parse(event.data);
+    if (message.type === i.r) {
+      // The user has been authenticated.
+      console.log("User authenticated.");
+    } else {
+      // The user was not authenticated.
+      console.log("User not authenticated.");
+    }
+  }
+});
+
 var interval = setInterval(function() {
     console.log('Interval Running');
     if( Pi == "undefined" || Pi == ""){
