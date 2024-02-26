@@ -40,15 +40,34 @@ function pi_login(){
   });
 }
 
-window.addEventListener("message", (event) => {
-  if (event.origin === "*") {
-    const message = JSON.parse(event.data);
-    if (message.type === i.r) {
-      // The user has been authenticated.
-      console.log("User authenticated.");
-    } else {
-      // The user was not authenticated.
-      console.log("User not authenticated.");
+// Create a function to be executed when the post message is received
+function executeFunction(data) {
+  // Get the function name and the arguments
+  const functionName = data.function;
+  const args = data.args;
+
+  // Check if the function exists in the parent window
+  if (typeof window[functionName] === "function") {
+    // If so, execute it with the given arguments
+    window[functionName].apply(null, args);
+  }
+}
+
+// Create a post message listener
+window.addEventListener("message", function (event) {
+  // Check if the message has a 'command' property
+  if (event.data.hasOwnProperty("command")) {
+    // Get the command and the data
+    const command = event.data.command;
+    const data = event.data.data || {};
+
+    // Execute the appropriate function
+    switch (command) {
+      case "executeFunction":
+        executeFunction(data);
+        break;
+      default:
+        // Handle other commands as needed
     }
   }
 });
