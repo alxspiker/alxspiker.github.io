@@ -27,7 +27,10 @@ const waitForIframeToLoad = () => new Promise((resolve) => {
     // Your further actions here...
 //}
 
-main();
+//main();
+function onIncompletePaymentFound(payment) {
+  alert('incomplete:'+payment);
+};
 
 var interval = setInterval(function() {
     console.log('Interval Running');
@@ -37,7 +40,11 @@ var interval = setInterval(function() {
       console.log('Interval Stopped');
       clearInterval(interval);
       Pi.init({ version: "2.0", sandbox: false });
-      Pi.login();
+      Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
+        alert('authenticate:'+auth);
+      }).catch(function(error) {
+        alert('authenticate:'+error);
+      });
     }
   }, 1000);
 </script>
