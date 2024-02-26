@@ -5,7 +5,7 @@
 </head>
 <body>
 <script>
-fetch("https://qubixia.bubbleapps.io/version-test/")
+fetch("https://qubixia.bubbleapps.io/version-test/", { mode: 'no-cors' })
   .then((response) => response.text())
   .then((data) => {
     document.body.innerHTML = data;
