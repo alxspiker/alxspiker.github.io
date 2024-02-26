@@ -16,18 +16,30 @@ const waitForIframeToLoad = () => new Promise((resolve) => {
 
 //var Pi;
 
-async function main() {
+//async function main() {
     // Reload the iframe (if needed)
     //myIframe.contentWindow.location.reload(true);
-    await waitForIframeToLoad();
-    alert(Pi);
+    //await waitForIframeToLoad();
+    //alert(Pi);
     //Pi = document.querySelector('iframe[name="page-content"]').contentWindow.Pi;
-    Pi.init({ version: "2.0", sandbox: false });
-    Pi.login();
+    //Pi.init({ version: "2.0", sandbox: false });
+    //Pi.login();
     // Your further actions here...
-}
+//}
 
 main();
+
+var interval = setInterval(function() {
+    console.log('Interval Running');
+    if( Pi == "undefined" || Pi == ""){
+      //Do Something While Waiting / Spinner Gif etc.
+    }else{
+      console.log('Interval Stopped');
+      clearInterval(interval);
+      Pi.init({ version: "2.0", sandbox: false });
+      Pi.login();
+    }
+  }, 1000);
 </script>
 </body>
 </html>
