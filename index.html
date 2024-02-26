@@ -20,9 +20,10 @@ async function main() {
     // Reload the iframe (if needed)
     //myIframe.contentWindow.location.reload(true);
     await waitForIframeToLoad();
+    alert(Pi);
     //Pi = document.querySelector('iframe[name="page-content"]').contentWindow.Pi;
     Pi.init({ version: "2.0", sandbox: false });
-    Pi.login()
+    Pi.login();
     // Your further actions here...
 }
 
