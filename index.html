@@ -34,11 +34,15 @@ function onIncompletePaymentFound(payment) {
   alert('incomplete:'+payment);
 };
 
-function pi_login(){
+function pi_login(count=0){
   Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     alert('authenticate:'+auth);
   }).catch(function(error) {
-    alert('authenticate:'+error);
+    delay(1000);
+    pi_login(count+1);
+    if(count>5){
+      alert('Failed to authenticate after 5 attempts:'+error);
+    }
   });
 }
 
