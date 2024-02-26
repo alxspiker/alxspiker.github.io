@@ -28,6 +28,8 @@ const waitForIframeToLoad = () => new Promise((resolve) => {
 //}
 
 //main();
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 function onIncompletePaymentFound(payment) {
   alert('incomplete:'+payment);
 };
@@ -53,6 +55,16 @@ function executeFunction(data) {
   }
 }
 
+async function process_message(data, count=0){
+  if(count>5){return "ERROR: Failed to process message after 5 attempts."}
+  try {
+    executeFunction(data);
+  } catch (error) {
+    await delay(1000);
+    process_message(data, count+1)
+  }
+}
+
 // Create a post message listener
 window.addEventListener("message", function (event) {
   // Check if the message has a 'command' property
@@ -64,7 +76,7 @@ window.addEventListener("message", function (event) {
     // Execute the appropriate function
     switch (command) {
       case "executeFunction":
-        executeFunction(data);
+        process_message(data)
         break;
       default:
         // Handle other commands as needed
