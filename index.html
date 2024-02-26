@@ -32,6 +32,14 @@ function onIncompletePaymentFound(payment) {
   alert('incomplete:'+payment);
 };
 
+function pi_login(){
+  Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
+    alert('authenticate:'+auth);
+  }).catch(function(error) {
+    alert('authenticate:'+error);
+  });
+}
+
 var interval = setInterval(function() {
     console.log('Interval Running');
     if( Pi == "undefined" || Pi == ""){
