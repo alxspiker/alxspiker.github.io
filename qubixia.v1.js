@@ -17,7 +17,7 @@ function user_login_complete(data){
   };
   
   // Send the message to the iframe using the contentWindow property
-  document.getElementById("page-content").contentWindow.postMessage(message, "https://qubixia.bubbleapps.io/version-test/");
+  document.getElementById("page-content").contentWindow.postMessage(message, "*");
 }
 
 function pi_login(){
@@ -52,7 +52,7 @@ function executeFunction(data) {
 // Create a post message listener
 window.addEventListener("message", function (event) {
   // Check if the message is from the iframe
-  if (event.origin == "https://qubixia.bubbleapps.io/version-test/") {
+  if (event.origin == "*") {
     // Check if the message has a 'command' property
     if (event.data.hasOwnProperty("command")) {
       // Get the command and the data
@@ -95,7 +95,7 @@ iframe.contentDocument.addEventListener("DOMContentLoaded", function() {
   postMessageHandler(
     window, // The current window object
     iframe.contentWindow, // The target window object
-    "https://qubixia.bubbleapps.io/version-test/", // The target origin
+    "*", // The target origin
     message, // The message object
     function (data) {
       // A callback function to execute after receiving a message
