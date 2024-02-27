@@ -15,7 +15,7 @@ function user_login_complete(data){
     data: data 
   };
   
-  parent.postMessage(message, "*");
+  document.getElementById("page-content").contentWindow.postMessage(message, "*");
 }
 
 function pi_login(){
