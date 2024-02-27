@@ -4,6 +4,15 @@
   <title>Qubixia</title>
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <script src="qubixia.v1.js"></script> <!-- Move your JavaScript code to a separate file -->
+  <style>
+    button {
+      position: absolute;
+      /* Set other styles as needed */
+      z-index: 1001; /* Higher value than div1 */
+      border-right: 2px solid black; /* Shadow effect */
+      border-bottom: 2px solid black; /* Shadow effect */
+    }
+  </style>
 </head>
 <body>
   <button onclick="clear_cache">Force Clear Cache</button>
