@@ -29,8 +29,6 @@ event.waitUntil(
     return Promise.all(
         cacheNames.map(cacheName => {
         if (cacheName !== CACHE_NAME) {
-            caches.delete(cacheName);
-            window.location.reload();
             return caches.delete(cacheName);
         }
         })
