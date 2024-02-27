@@ -1,5 +1,9 @@
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
 
+function update_page_content(url){
+    document.getElementById("page-content").src = MainUrl+url;
+}
+
 function onIncompletePaymentFound(payment) {
   alert('incomplete:'+payment);
 };
@@ -9,13 +13,7 @@ function pi_login(){
     alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     // Load the main page content using fetch and innerHTML
-    fetch(MainUrl+"home").then(function(response) {
-      return response.text();
-    }).then(function(html) {
-      document.getElementById("page-content").innerHTML = html;
-    }).catch(function(error) {
-      alert('Failed to load the main page content:'+error);
-    });
+    update_page_content("home")
   }).catch(function(error) {
     alert('Failed to authenticate, please refresh the page to try again:'+error);
     Pi.LoggedInUser = null;
