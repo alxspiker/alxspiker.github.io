@@ -1,5 +1,9 @@
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
-alert("This app is in delopement, usage is at your own risk.");
+
+function clear_cache(){
+  window.location.reload(true);
+}
+
 function update_page_content(url){
     document.getElementById("page-content").src = MainUrl+url;
 }
