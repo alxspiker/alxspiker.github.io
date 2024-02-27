@@ -1,10 +1,5 @@
 //MAIN
-alert("This app is in development, please be patient!")
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
-
-function clear_cache(){
-  window.location.reload(true);
-}
 
 function update_page_content(url){
     document.getElementById("page-content").src = MainUrl+url;
@@ -16,7 +11,7 @@ function onIncompletePaymentFound(payment) {
 
 function pi_login(){
   Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
-    alert('authenticate:'+auth);
+    //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     // Load the main page content using fetch and innerHTML
     update_page_content("home");
