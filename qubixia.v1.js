@@ -20,7 +20,7 @@ function pi_login(event){
         //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
         Pi.LoggedInUser = auth;
         // Send a message back to the iframe
-        update_page_content("authenticate?data="+JSON.stringify(auth), false);
+        update_page_content("pinet-authenticate?data="+JSON.stringify(auth), false);
         //user_login_complete(auth);
     }).catch(function(error) {
         Pi.LoggedInUser = null;
@@ -33,7 +33,20 @@ function pi_login(event){
 window.addEventListener("message", function (event) {
     // Check if the message is from the iframe
     if (event.origin == "https://qubixia.bubbleapps.io") {
-        pi_login(event);
+        if (event.data.hasOwnProperty("command")) {
+            // Get the command and the data
+            const command = event.data.command;
+            const data = event.data.data || {};
+        
+            // Execute the appropriate function
+            switch (command) {
+                case "pinet_authenticate":
+                    pi_login(event);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 });
 
