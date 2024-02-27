@@ -1,8 +1,7 @@
-const CACHE_NAME = 'qubixia_v1.0.11';
+const CACHE_NAME = 'qubixia_v1.0.12';
 const urlsToCache = [
   '/index.html',
   '/qubixia.v1.js',
-  '/service-worker.js',
   '/validation-key.txt',
   // Add other assets you want to cache
 ];
