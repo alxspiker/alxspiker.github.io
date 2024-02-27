@@ -6,7 +6,7 @@ function update_page_content(url){
 
 window.addEventListener("message", function (event) {
     // Check if the message is from the iframe
-    if (event.origin == "https://qubixia.bubbleapps.io/version-test/") {
+    if (event.origin == "https://qubixia.bubbleapps.io") {
         // Get the data from the message
         var data = event.data;
         // Do something with the data
