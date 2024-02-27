@@ -75,7 +75,7 @@ window.addEventListener("message", function (event) {
 Pi.init({ version: "2.0", sandbox: false });
 
 // Get the reference to the iframe element
-var iframe = document.getElementById("myIframe");
+var iframe = document.getElementById("page-content");
 
 // Declare a variable to store the reference to the iframe's window object
 var iframeWindow;
