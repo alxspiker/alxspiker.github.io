@@ -4,6 +4,10 @@ function update_page_content(url){
     document.getElementById("page-content").src = MainUrl+url;
 }
 
+function onIncompletePaymentFound(payment) {
+    alert('incomplete:'+payment);
+};
+
 function pi_login(event){
     // Get the data from the message
     var data = event.data;
