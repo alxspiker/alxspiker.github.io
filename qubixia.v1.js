@@ -10,7 +10,7 @@ window.addEventListener("message", function (event) {
         // Get the data from the message
         var data = event.data;
         // Do something with the data
-        console.log(data);
+        console.log("Parent:"+data);
         // Send a message back to the iframe
         event.source.postMessage("Got it!", event.origin);
     }
