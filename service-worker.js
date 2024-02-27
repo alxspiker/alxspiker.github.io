@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v1';
+const CACHE_NAME = 'qubixia_v1.0.0';
 const urlsToCache = [
   '/',
   // Add other assets you want to cache
