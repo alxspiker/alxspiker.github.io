@@ -1,3 +1,4 @@
+// In the parent window
 //MAIN
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
 
@@ -15,7 +16,8 @@ function user_login_complete(data){
     data: data 
   };
   
-  document.getElementById("page-content").contentWindow.postMessage(message, "*");
+  // Send the message to the iframe using the iframeWindow variable
+  iframeWindow.postMessage(message, "*");
 }
 
 function pi_login(){
@@ -49,19 +51,22 @@ function executeFunction(data) {
 
 // Create a post message listener
 window.addEventListener("message", function (event) {
-  // Check if the message has a 'command' property
-  if (event.data.hasOwnProperty("command")) {
-    // Get the command and the data
-    const command = event.data.command;
-    const data = event.data.data || {};
+  // Check if the message is from the iframe
+  if (event.origin == "*") {
+    // Check if the message has a 'command' property
+    if (event.data.hasOwnProperty("command")) {
+      // Get the command and the data
+      const command = event.data.command;
+      const data = event.data.data || {};
 
-    // Execute the appropriate function
-    switch (command) {
-      case "executeFunction":
-        executeFunction(data)
-        break;
-      default:
-        // Handle other commands as needed
+      // Execute the appropriate function
+      switch (command) {
+        case "executeFunction":
+          executeFunction(data)
+          break;
+        default:
+          // Handle other commands as needed
+      }
     }
   }
 });
@@ -69,11 +74,14 @@ window.addEventListener("message", function (event) {
 // Initialize the Pi SDK
 Pi.init({ version: "2.0", sandbox: false });
 
-// Check if the user is already logged in
-//if (Pi.LoggedInUser) {
-  // If so, load the main page content
-//  pi_login();
-//} else {
-  // If not, show the Pi login button
-  //Pi.renderButton(document.getElementById("page-content"), pi_login);
-//}
+// Get the reference to the iframe element
+var iframe = document.getElementById("myIframe");
+
+// Declare a variable to store the reference to the iframe's window object
+var iframeWindow;
+
+// Wait for the iframe to load before sending the message
+iframe.addEventListener("load", function() {
+  // Get the iframe's window object
+  iframeWindow = iframe.contentWindow;
+});
