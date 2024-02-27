@@ -9,11 +9,21 @@ function onIncompletePaymentFound(payment) {
   alert('incomplete:'+payment);
 };
 
+function user_login_complete(data){
+  var message = {
+    command: "loginResult", // A command to help you identify the response
+    data: data 
+  };
+  
+  parent.postMessage(message, "*");
+}
+
 function pi_login(){
   //Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
   Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
+    user_login_complete(data);
     // Load the main page content using fetch and innerHTML
     update_page_content("home");
   }).catch(function(error) {
