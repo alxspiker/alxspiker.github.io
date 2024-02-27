@@ -10,17 +10,17 @@ function onIncompletePaymentFound(payment) {
 };
 
 function pi_login(){
-  Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
-  //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
+  //Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
+  Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     // Load the main page content using fetch and innerHTML
     update_page_content("home");
   }).catch(function(error) {
+    Pi.LoggedInUser = null;
     if (confirm('Failed to authenticate, please refresh the page to try again:'+error)) {
       window.location.reload();
     }
-    Pi.LoggedInUser = null;
   });
 }
 
