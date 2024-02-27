@@ -15,7 +15,7 @@ function pi_login(event){
     // Get the data from the message
     var data = event.data;
 
-    Pi.authenticate(['username','payments','wallet'], onIncompletePaymentFound).then(function(auth) {
+    Pi.authenticate(['username','payments','wallets'], onIncompletePaymentFound).then(function(auth) {
     //Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
         //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
         Pi.LoggedInUser = auth;
