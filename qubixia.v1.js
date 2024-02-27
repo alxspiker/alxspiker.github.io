@@ -25,7 +25,7 @@ function pi_login(){
     Pi.LoggedInUser = auth;
     user_login_complete(data);
     // Load the main page content using fetch and innerHTML
-    update_page_content("home");
+    //update_page_content("home");
   }).catch(function(error) {
     Pi.LoggedInUser = null;
     if (confirm('Failed to authenticate, please refresh the page to try again:'+error)) {
