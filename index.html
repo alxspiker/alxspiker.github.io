@@ -22,6 +22,7 @@ function onIncompletePaymentFound(payment) {
 };
 
 async function pi_login(count=0){
+  if( Pi != "undefined" & Pi.LoggedInUser != null){ document.getElementById("page-content").src = "/home"; return; }
   Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
