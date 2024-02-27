@@ -1,5 +1,5 @@
 //MAIN
-
+alert("This app is in development, please be patient!")
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
 
 function clear_cache(){
