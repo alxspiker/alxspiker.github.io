@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qubixia_v1.0.5';
+const CACHE_NAME = 'qubixia_v1.0.6';
 const urlsToCache = [
   '/index.html',
   '/qubixia.v1.js',
@@ -7,10 +7,12 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
+event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
+    .then(cache => cache.addAll(urlsToCache))
+    .then(self.skipWaiting()) // Tell the new service worker to take over
+    .then(self.clients.claim()) // Makes sure the new worker takes over existing clients
+    );
 });
 
 self.addEventListener('fetch', event => {
