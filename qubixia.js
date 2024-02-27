@@ -61,5 +61,5 @@ if (Pi.LoggedInUser) {
   pi_login();
 } else {
   // If not, show the Pi login button
-  Pi.renderButton(document.getElementById("page-content"), pi_login);
+  //Pi.renderButton(document.getElementById("page-content"), pi_login);
 }
