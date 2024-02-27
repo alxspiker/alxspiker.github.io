@@ -1,8 +1,7 @@
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
   '/',
-  '/styles.css',
-  '/script.js',
+  '/qubixia.v1.js',
   // Add other assets you want to cache
 ];
 
