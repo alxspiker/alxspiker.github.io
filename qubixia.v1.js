@@ -16,8 +16,8 @@ function user_login_complete(data){
     data: data 
   };
   
-  // Send the message to the iframe using the iframeWindow variable
-  iframeWindow.postMessage(message, "*");
+  // Send the message to the iframe using the contentWindow property
+  document.getElementById("page-content").contentWindow.postMessage(message, "https://qubixia.bubbleapps.io/version-test/");
 }
 
 function pi_login(){
@@ -52,7 +52,7 @@ function executeFunction(data) {
 // Create a post message listener
 window.addEventListener("message", function (event) {
   // Check if the message is from the iframe
-  if (event.origin == "*") {
+  if (event.origin == "https://qubixia.bubbleapps.io/version-test/") {
     // Check if the message has a 'command' property
     if (event.data.hasOwnProperty("command")) {
       // Get the command and the data
@@ -75,13 +75,32 @@ window.addEventListener("message", function (event) {
 Pi.init({ version: "2.0", sandbox: false });
 
 // Get the reference to the iframe element
-var iframe = document.getElementById("page-content");
+var iframe = document.getElementById("myIframe");
 
-// Declare a variable to store the reference to the iframe's window object
-var iframeWindow;
+// Wait for the iframe's document to load before sending the message
+iframe.contentDocument.addEventListener("DOMContentLoaded", function() {
+  // Create a message object with the command and the data
+  var message = {
+    command: "executeFunction",
+    data: {
+      // Specify the function name and the arguments
+      function: "pi_login",
+      args: [
+        // Add any arguments you want to pass to the function
+      ]
+    }
+  };
 
-// Wait for the iframe to load before sending the message
-iframe.addEventListener("load", function() {
-  // Get the iframe's window object
-  iframeWindow = iframe.contentWindow;
+  // Use the post message handler function to send and receive the message
+  postMessageHandler(
+    window, // The current window object
+    iframe.contentWindow, // The target window object
+    "https://qubixia.bubbleapps.io/version-test/", // The target origin
+    message, // The message object
+    function (data) {
+      // A callback function to execute after receiving a message
+      // Do something with the data
+      console.log(data);
+    }
+  );
 });
