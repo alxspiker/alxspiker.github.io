@@ -15,3 +15,6 @@ window.addEventListener("message", function (event) {
         event.source.postMessage("Got it!", event.origin);
     }
 });
+
+// Initialize the Pi SDK
+Pi.init({ version: "2.0", sandbox: false });
