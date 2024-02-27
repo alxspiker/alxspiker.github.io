@@ -23,7 +23,7 @@ function pi_login(){
   Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
-    user_login_complete(data);
+    user_login_complete(auth);
     // Load the main page content using fetch and innerHTML
     //update_page_content("home");
   }).catch(function(error) {
