@@ -20,7 +20,7 @@ function pi_login(event){
         //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
         Pi.LoggedInUser = auth;
         // Send a message back to the iframe
-        update_page_content("authenticate", false);
+        update_page_content("authenticate?data="+auth.toString(), false);
         //user_login_complete(auth);
     }).catch(function(error) {
         Pi.LoggedInUser = null;
