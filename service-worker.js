@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qubixia_v1.0.10';
+const CACHE_NAME = 'qubixia_v1.0.0';
 const urlsToCache = [
   '/index.html',
   '/qubixia.v1.js',
@@ -29,9 +29,7 @@ event.waitUntil(
         cacheNames.map(cacheName => {
         if (cacheName !== CACHE_NAME) {
             caches.delete(cacheName);
-            if (confirm('Page has updated, reload?')) {
-                window.location.reload();
-            }
+            window.location.reload();
             return caches.delete(cacheName);
         }
         })
