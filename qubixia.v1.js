@@ -10,7 +10,8 @@ function onIncompletePaymentFound(payment) {
 };
 
 function pi_login(){
-  Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
+  Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
+  //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     // Load the main page content using fetch and innerHTML
@@ -59,10 +60,10 @@ window.addEventListener("message", function (event) {
 Pi.init({ version: "2.0", sandbox: false });
 
 // Check if the user is already logged in
-if (Pi.LoggedInUser) {
+//if (Pi.LoggedInUser) {
   // If so, load the main page content
-  pi_login();
-} else {
+//  pi_login();
+//} else {
   // If not, show the Pi login button
   //Pi.renderButton(document.getElementById("page-content"), pi_login);
-}
+//}
