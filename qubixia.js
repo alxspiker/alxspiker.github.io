@@ -13,7 +13,7 @@ function pi_login(){
     alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     // Load the main page content using fetch and innerHTML
-    update_page_content("home")
+    update_page_content("home");
   }).catch(function(error) {
     alert('Failed to authenticate, please refresh the page to try again:'+error);
     Pi.LoggedInUser = null;
