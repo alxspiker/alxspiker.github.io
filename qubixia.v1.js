@@ -1,7 +1,10 @@
 const MainUrl = "https://qubixia.bubbleapps.io/version-test/"
 
-function update_page_content(url){
-    document.getElementById("page-content").src = MainUrl+url;
+function update_page_content(url, full_url=false){
+    if(!full_url){
+        url = MainUrl+url
+    }
+    document.getElementById("page-content").src = url;
 }
 
 function onIncompletePaymentFound(payment) {
@@ -16,7 +19,7 @@ function pi_login(event){
         //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
         Pi.LoggedInUser = auth;
         // Send a message back to the iframe
-        event.source.postMessage(auth, event.origin);
+        update_page_content("authenticate", false);
         //user_login_complete(auth);
     }).catch(function(error) {
         Pi.LoggedInUser = null;
