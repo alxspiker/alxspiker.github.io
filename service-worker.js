@@ -1,4 +1,4 @@
-const CACHE_NAME = 'qubixia_v1.0.33';
+const CACHE_NAME = 'qubixia_v1.0.34';
 const urlsToCache = [
   '/index.html',
   '/qubixia.v1.js',
