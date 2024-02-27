@@ -21,8 +21,8 @@ function user_login_complete(data){
 }
 
 function pi_login(){
-  //Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
-  Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
+  Pi.authenticate(['payments','username'], onIncompletePaymentFound).then(function(auth) {
+  //Pi.authenticate(['payments'], onIncompletePaymentFound).then(function(auth) {
     //alert('authenticate:'+auth);
     Pi.LoggedInUser = auth;
     user_login_complete(auth);
@@ -73,6 +73,53 @@ window.addEventListener("message", function (event) {
 
 // Initialize the Pi SDK
 Pi.init({ version: "2.0", sandbox: false });
+
+
+
+// A generic function to send and receive post messages
+function postMessageHandler(window, targetWindow, targetOrigin, message, callback) {
+  // Check if the window and the target window are valid
+  if (window && targetWindow) {
+    // Send the message to the target window
+    targetWindow.postMessage(message, targetOrigin);
+
+    // Listen for the message from the target window
+    window.addEventListener("message", function (event) {
+      // Check if the message is from the target origin
+      if (event.origin == targetOrigin) {
+        // Check if the message has a 'command' property
+        if (event.data.hasOwnProperty("command")) {
+          // Get the command and the data
+          const command = event.data.command;
+          const data = event.data.data || {};
+
+          // Handle different commands or actions
+          switch (command) {
+            case "loginResult":
+              // Do something with the login result
+              console.log(data);
+              break;
+            case "sendImage":
+              // Do something with the image data
+              console.log(data);
+              break;
+            case "executeFunction":
+              // Do something with the function name and the arguments
+              console.log(data);
+              break;
+            default:
+              // Handle other commands as needed
+          }
+
+          // Execute the callback function if provided
+          if (typeof callback === "function") {
+            callback(data);
+          }
+        }
+      }
+    });
+  }
+}
 
 // Get the reference to the iframe element
 var iframe = document.getElementById("myIframe");
