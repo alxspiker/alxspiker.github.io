@@ -1,7 +1,7 @@
 // Check if a new cache is available on page load.
 window.addEventListener('load', function(e) {
 
-  window.applicationCache.addEventListener('updateready', function(e) {
+  window.addEventListener('updateready', function(e) {
     if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
       // Browser downloaded a new app cache.
       // Swap it in and reload the page to get the new hotness.
@@ -40,7 +40,9 @@ function pi_login(){
     // Load the main page content using fetch and innerHTML
     update_page_content("home");
   }).catch(function(error) {
-    alert('Failed to authenticate, please refresh the page to try again:'+error);
+    if (confirm('Failed to authenticate, please refresh the page to try again:'+error)) {
+      window.location.reload();
+    }
     Pi.LoggedInUser = null;
   });
 }
