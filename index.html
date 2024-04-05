@@ -1,1 +1,58 @@
-<iframe title="HTML preview" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals" class="iframe-code mx-auto max-h-[60vh] w-full bg-background false false" src="https://wandb.github.io/openui/index.html?buster=113" style="height: 100%; width:100%;"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="icon" href="steamgrid/icon.png"/>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="dark:bg-zinc-800 bg-white min-h-screen">
+<body
+  class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"
+>
+  <div class="max-w-4xl mx-auto p-4 sm:p-8 md:p-12 lg:px-16 lg:py-24">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Pi Network SDK Integration</h1>
+    <p class="text-lg md:text-xl">
+      This example demonstrates how to integrate the Pi Network SDK into a web application.
+    </p>
+    <div id="user-info" class="mt-8 p-4 bg-white dark:bg-zinc-800 rounded-lg shadow-md"></div>
+    <button
+      id="authenticate"
+      class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 ease-in-out"
+    >
+      Authenticate with Pi
+    </button>
+  </div>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    Pi.init({ version: "2.0", sandbox: true });
+
+    document.getElementById('authenticate').addEventListener('click', () => {
+      Pi.authenticate(['username', 'payments', 'wallet_address'], onIncompletePaymentFound)
+        .then((authResult) => {
+          displayUserInfo(authResult.user);
+        })
+        .catch((error) => {
+          console.error('Authentication failed', error);
+        });
+    });
+
+    function onIncompletePaymentFound(payment) {
+      console.log('Incomplete payment found', payment);
+      // Handle the incomplete payment here, e.g., by sending it to your server
+    }
+
+    function displayUserInfo(user) {
+      const userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = `
+        <div class="text-lg md:text-xl">
+          <p class="font-semibold"><span class="text-blue-500 dark:text-blue-400">UID:</span> ${user.uid}</p>
+          <p class="font-semibold"><span class="text-blue-500 dark:text-blue-400">Username:</span> ${user.username}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
